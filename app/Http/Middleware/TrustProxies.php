@@ -8,21 +8,16 @@ use Illuminate\Http\Request;
 class TrustProxies extends Middleware
 {
     /**
-     * The trusted proxies for this application.
-     *
-     * @var array<int, string>|string|null
+     * Izinkan semua proxy (cocok untuk hosting seperti Railway).
      */
-    protected $proxies;
+    protected $proxies = '*';
 
     /**
-     * The headers that should be used to detect proxies.
-     *
-     * @var int
+     * Gunakan kombinasi header standar (kompatibel untuk Laravel 8/9).
      */
     protected $headers =
         Request::HEADER_X_FORWARDED_FOR |
         Request::HEADER_X_FORWARDED_HOST |
         Request::HEADER_X_FORWARDED_PORT |
-        Request::HEADER_X_FORWARDED_PROTO |
-        Request::HEADER_X_FORWARDED_AWS_ELB;
+        Request::HEADER_X_FORWARDED_PROTO;
 }
