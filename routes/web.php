@@ -10,7 +10,14 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\User\AbsensiController;
 
 // Route login
-Route::get('/', fn() => view('login'));
+Route::get('/', function () {
+    if (auth()->check()) {
+        return auth()->user()->role === 'admin'
+            ? redirect()->route('dashboard.admin')
+            : redirect()->route('dashboard.user');
+    }
+    return view('login');
+});
 
 Route::get('/login', fn() => view('login'))->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.process');

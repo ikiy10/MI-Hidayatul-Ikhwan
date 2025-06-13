@@ -14,11 +14,11 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            if (Auth::user()->role == 'admin') {
-                return redirect()->intended(route('dashboard.admin'));
-            } else {
-                return redirect()->intended(route('dashboard.user'));
-            }
+        if (Auth::user()->role == 'admin') {
+            return redirect()->route('dashboard.admin');
+        } else {
+            return redirect()->route('dashboard.user');
+        }
         }
 
         return back()->with('error', 'Email atau password salah.');

@@ -60,11 +60,11 @@
         @csrf
 
         <div class="mb-3">
-          <input type="email" name="email" class="form-control" placeholder="Enter your username" required autofocus />
+          <input type="email" name="email" class="form-control" placeholder="Masukan Username Atau Email" required autofocus />
         </div>
 
         <div class="mb-3 position-relative">
-          <input type="password" name="password" class="form-control" placeholder="Enter your password" id="passwordField" required />
+          <input type="password" name="password" class="form-control" placeholder="Masukan password" id="passwordField" required />
           <span class="position-absolute end-0 top-50 translate-middle-y me-3 toggle-password" onclick="togglePassword()" id="toggleIcon">
             <i class="fa-solid fa-eye-slash"></i>
           </span>

@@ -59,7 +59,7 @@
             </button>
                 <a href="{{ route('laporan.absensi.export.excel', request()->query()) }}"
                 class="flex items-center justify-center gap-1 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md shadow transition">
-                    📥 Cetak Excel
+                📥 Cetak Excel
                 </a>
         </form>
     </div>
