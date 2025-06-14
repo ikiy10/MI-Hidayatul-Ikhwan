@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'dashboard')
+@section('title', 'Dashboard')
 
 @section('content')
 <div class="container mx-auto mt-10 px-4">

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Jadwal')
+@section('title', 'Laporan Jadwal')
 
 @section('content')
 <div class="max-w-7xl mx-auto py-6 space-y-6">
