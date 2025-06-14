@@ -7,13 +7,13 @@
 
     {{-- Card utama --}}
     <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md border border-gray-200">
-        
-        {{-- Judul di dalam card dengan warna biru --}}
+
+        {{-- Judul --}}
         <div class="text-center mb-4">
             <h1 class="text-2xl font-bold text-blue-600">📷 Scan QR untuk Absen</h1>
         </div>
 
-        {{-- Dropdown Pilih Kamera --}}
+        {{-- Pilih Kamera --}}
         <div class="mb-4">
             <label for="camera-select" class="block text-sm font-medium text-gray-700 mb-1">Pilih Kamera:</label>
             <select id="camera-select" class="w-full border-gray-300 rounded-md shadow-sm">
@@ -21,16 +21,16 @@
             </select>
         </div>
 
-        {{-- Area scanner kamera --}}
-        <div id="reader" class="rounded-md overflow-hidden border border-gray-300 mb-4" style="width: 100%; height: 250px;"></div>
+        {{-- Area Scanner --}}
+        <div id="reader" class="rounded-md overflow-hidden border border-gray-300 mb-4" style="width: 100%; height: 300px;"></div>
 
-        {{-- Tombol kontrol --}}
+        {{-- Tombol --}}
         <div class="flex justify-center gap-4 mb-4">
             <button id="start-scan" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Mulai Scan</button>
             <button id="stop-scan" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Stop Scan</button>
         </div>
 
-        {{-- Upload gambar QR --}}
+        {{-- Upload Gambar --}}
         <div class="mt-2">
             <label class="block text-sm font-medium text-gray-700 mb-1">Atau upload gambar QR:</label>
             <input type="file" accept="image/*" id="qr-image-upload" class="block w-full border-gray-300 rounded-md shadow-sm" />
@@ -39,7 +39,6 @@
         <canvas id="qr-canvas" class="hidden"></canvas>
     </div>
 
-    {{-- Catatan tambahan --}}
     <div class="mt-4 text-sm text-gray-500 text-center px-6">
         Pastikan kamera aktif atau gambar QR terlihat jelas.
     </div>
@@ -50,11 +49,20 @@
 <script src="https://unpkg.com/html5-qrcode"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 
+<style>
+#reader > video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+</style>
+
 <script>
     const html5QrCode = new Html5Qrcode("reader");
     let isScanning = false;
     let scanCooldown = false;
 
+    // Ambil daftar kamera
     Html5Qrcode.getCameras().then(devices => {
         const select = document.getElementById('camera-select');
         select.innerHTML = '';
@@ -93,9 +101,16 @@
         isScanning = true;
 
         const selectedCameraId = document.getElementById('camera-select').value;
+
         html5QrCode.start(
             { deviceId: { exact: selectedCameraId } },
-            { fps: 10, qrbox: { width: 250, height: 250 } },
+            {
+                fps: 10,
+                qrbox: function(viewfinderWidth, viewfinderHeight) {
+                    const size = Math.min(viewfinderWidth, viewfinderHeight) * 0.8;
+                    return { width: size, height: size };
+                }
+            },
             decodedText => {
                 if (!scanCooldown) {
                     scanCooldown = true;
@@ -103,7 +118,9 @@
                     setTimeout(() => { scanCooldown = false; }, 2000);
                 }
             },
-            error => { /* Tidak perlu ditampilkan ke user */ }
+            error => {
+                // Bisa kosong, jangan alert agar tidak ganggu pengguna
+            }
         ).catch(err => {
             alert("Gagal membuka kamera: " + err);
             isScanning = false;
@@ -122,7 +139,7 @@
     document.getElementById('start-scan').addEventListener('click', startCameraScan);
     document.getElementById('stop-scan').addEventListener('click', stopCameraScan);
 
-    // Scan dari gambar
+    // Upload gambar
     document.getElementById('qr-image-upload').addEventListener('change', function(event) {
         const file = event.target.files[0];
         if (!file) return;
