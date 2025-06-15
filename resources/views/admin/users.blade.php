@@ -112,7 +112,7 @@
 
             <div class="text-right">
                 <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-md shadow-md transition duration-300">
-                    Simpan User
+                   💾 Simpan User
                 </button>
             </div>
         </form>
