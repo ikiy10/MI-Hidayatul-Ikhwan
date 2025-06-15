@@ -7,9 +7,12 @@
 
     {{-- Header tetap kuning --}}
     <div class="bg-gradient-to-r from-yellow-300 to-yellow-500 text-black font-bold text-xl rounded-t-md px-6 py-4 shadow-md flex items-center justify-center space-x-3">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="..." />
+        <!-- Ikon Heroicons di tengah -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25-2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5" />
         </svg>
+
+        <!-- Teks -->
         <span>Tambah Jadwal</span>
     </div>
 
@@ -120,7 +123,7 @@
 
             <div class="text-right">
                 <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-md shadow-md">
-                    💾 Simpan Jadwal
+                💾 Simpan Jadwal
                 </button>
             </div>
         </form>
