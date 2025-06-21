@@ -91,7 +91,7 @@
                         <td class="px-4 py-2">{{ $absen->jadwal->hari ?? '-' }}</td>
                         <td class="px-4 py-2">{{ $absen->jam_mulai ?? '-' }}</td>
                         <td class="px-4 py-2">{{ $absen->tanggal ?? '-' }}</td>
-                        <td class="px-4 py-2">{{ \Carbon\Carbon::parse($absen->waktu_scan)->format('H:i:s') ?? '-' }}</td> {{-- Waktu scan --}}
+                        <td class="px-4 py-2">{{ $absen->waktu_scan ? \Carbon\Carbon::parse($absen->waktu_scan)->timezone('Asia/Jakarta')->format('H:i:s') : '-' }}</td> {{-- Waktu scan --}}
                         <td class="px-4 py-2 font-semibold {{ $absen->status_kehadiran === 'hadir' ? 'text-green-600' : 'text-red-600' }}">
                             {{ ucfirst($absen->status_kehadiran ?? '-') }}
                         </td>
